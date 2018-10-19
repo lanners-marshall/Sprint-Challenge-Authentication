@@ -1,12 +1,13 @@
 import React from 'react';
+import { JokeDiv } from './css';
 
 const Joke = (props) => {
 	return (
-		<div>
+		<JokeDiv>
 			<p>{props.joke.type}</p>
 			<p>{props.joke.setup}</p>
 			<p>{props.joke.punchline}</p>
-		</div>
+		</JokeDiv>
 	)
 }
 

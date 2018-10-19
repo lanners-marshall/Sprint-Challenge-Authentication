@@ -12,6 +12,8 @@ class Signup extends React.Component {
 		};
 	}
 
+
+
 	handleChange = event => {
  	  this.setState({[event.target.name]: event.target.value})
  	}
@@ -43,7 +45,7 @@ class Signup extends React.Component {
 							value={this.state.username}
 						/>
 						<input
-							type="text"
+							type="password"
 							placeholder='password'
 							onChange={this.handleChange}
 							name="password"

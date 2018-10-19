@@ -43,7 +43,7 @@ class Signin extends React.Component {
 							value={this.state.username}
 						/>
 						<input
-							type="text"
+							type="password"
 							placeholder='password'
 							onChange={this.handleChange}
 							name="password"

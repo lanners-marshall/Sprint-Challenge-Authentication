@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Joke from './Joke';
-import { Contain } from './css';
+import { Contain, Logout, JList } from './css';
 
 class Jokes extends React.Component {
 	constructor(props){
@@ -32,12 +32,18 @@ class Jokes extends React.Component {
 			})
 	}
 
-	
+	logOut = () => {
+		localStorage.removeItem('jwt');
+    this.props.history.push('/')
+	}
+
 	render() {
 		return (
-			<div>
+			<Contain>
+				<Logout onClick={this.logOut}>Logout</Logout>
+				<JList>JOKE LIST</JList>
 				{this.state.jokes.map((joke, index) => <Joke key={index} joke={joke}/>)}
-			</div>
+			</Contain>
 		)
 	}
 }
