@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Signup from './Auth/Signup';
 import Signin from './Auth/Signin';
+import Jokes from './Jokes/Jokes'
 import { Route, withRouter } from 'react-router-dom';
 
 class App extends Component {
@@ -10,7 +11,8 @@ class App extends Component {
     return (
       <div>
         <Route exact path='/' component={Signin} />
-        <Route exact path='/signup' component={Signup} />
+        <Route path='/signup' component={Signup} />
+        <Route path='/jokes' component={Jokes} />
       </div>
     );
   }
