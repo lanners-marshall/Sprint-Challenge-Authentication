@@ -4,11 +4,10 @@ import axios from 'axios';
 class Signin extends React.Component {
 	constructor(){
 		super();
-		this.state = {};
-	}
-
-	componentDidMount(){
-
+		this.state = {
+			username: '',
+			password: ''
+		};
 	}
 
 	// extra in case you need to reference
@@ -17,24 +16,37 @@ class Signin extends React.Component {
  	  this.setState({[event.target.name]: event.target.value})
  	}
 
+ 	submit = event => {
+ 		event.preventDefault()
+ 		axios.post('http://localhost:3300/api/login', this.state)
+ 		.then(response => {
+ 			console.log(response.data)
+ 			localStorage.setItem('jwt', response.data.token);
+ 		})
+ 		.catch(error => {
+ 			console.log(error.response.data)
+ 		})
+ 	}
+
 	render() {
 		return (
 			<div>	
-				 <form>
+				<form>
 					<input
-						type="username"
+						type="text"
 						placeholder='username'
 						onChange={this.handleChange}
 						name="username"
 						value={this.state.username}
 					/>
 					<input
-						type="password"
+						type="text"
 						placeholder='password'
 						onChange={this.handleChange}
 						name="password"
 						value={this.state.password}
 					/>
+					<button onClick={this.submit}>SignIn</button>
 				</form>
 			</div>
 		)
