@@ -29,6 +29,8 @@ class Jokes extends React.Component {
 			})
 			.catch(error => {
 				console.log(error)
+				localStorage.setItem('error', 'please log in');
+				this.props.history.push('/')
 			})
 	}
 

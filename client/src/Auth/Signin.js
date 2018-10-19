@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Contain, FlexForm, MainH1, BTN, BTNDiv } from './css';
+import { Contain, FlexForm, MainH1, BTN, BTNDiv, ErrorMsg } from './css';
 import { Link } from 'react-router-dom';
 
 class Signin extends React.Component {
@@ -8,7 +8,9 @@ class Signin extends React.Component {
 		super();
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			error: localStorage.getItem('error'),
+			failLog: ''
 		};
 	}
 
@@ -22,17 +24,26 @@ class Signin extends React.Component {
  		.then(response => {
  			console.log(response.data)
  			localStorage.setItem('jwt', response.data.token);
+ 			localStorage.removeItem('error');
  			this.props.history.push('/jokes')
  		})
  		.catch(error => {
- 			console.log(error.response.data)
+ 			console.log(error.response.data.msg)
+ 			this.setState({
+ 				failLog: error.response.data.msg,
+ 			})
  		})
+ 	}
+
+ 	removeError = () => {
+ 		localStorage.removeItem('error');
  	}
 
 	render() {
 		return (
 			<div>
 				<MainH1>Welcome User Sign in</MainH1>
+				<ErrorMsg>{this.state.error}</ErrorMsg>
 				<Contain>	
 					<FlexForm>
 						<input
@@ -52,7 +63,8 @@ class Signin extends React.Component {
 						<BTN onClick={this.submit}>SignIn</BTN>
 					</FlexForm>
 				</Contain>
-				<Link to='/signup'><BTNDiv><BTN>Not Registered? Click here to Sign Up</BTN></BTNDiv></Link>
+				<Link to='/signup'><BTNDiv><BTN onClick={this.removeError}>Not Registered? Click here to Sign Up</BTN></BTNDiv></Link>
+				<ErrorMsg>{this.state.failLog}</ErrorMsg>
 			</div>
 		)
 	}

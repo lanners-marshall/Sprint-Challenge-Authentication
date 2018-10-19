@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Contain, FlexForm, MainH1, BTN, BTNDiv } from './css';
+import { Contain, FlexForm, MainH1, BTN, BTNDiv, ErrorMsg } from './css';
 import { Link } from 'react-router-dom';
 
 class Signup extends React.Component {
@@ -8,7 +8,9 @@ class Signup extends React.Component {
 		super();
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			error1: '',
+			error2: '',
 		};
 	}
 
@@ -28,6 +30,10 @@ class Signup extends React.Component {
  		})
  		.catch(error => {
  			console.log(error.response.data)
+ 			this.setState({
+ 				error1: error.response.data.error1,
+ 				error2: error.response.data.error2
+ 			})
  		})
  	}
 
@@ -55,6 +61,8 @@ class Signup extends React.Component {
 					</FlexForm>
 				</Contain>
 				<Link to='/'><BTNDiv><BTN>Need to go back click here!</BTN></BTNDiv></Link>
+				<ErrorMsg>{this.state.error1}</ErrorMsg>
+				<ErrorMsg>{this.state.error2}</ErrorMsg>
 			</div>
 		)
 	}

@@ -33,8 +33,30 @@ function generateToken(user){
 }
 
 function register(req, res) {
-  // implement user registration
   const creds = req.body
+  
+  let e1 = '';
+  let e2 = '';
+  let bol = false;
+
+  if (creds.password.length < 5){
+    e1 = 'password must be 5 characters in length';
+    bol = true;
+  }
+
+  if (creds.username.length < 5){
+    e2 = 'username must be 5 characters in length';
+    bol = true;
+  }
+
+  //if form not filled out correctly end and send error msg
+  if (bol === true){
+    res.status(400).json({error1: e1, error2: e2})
+  }
+
+  //if form is filled out correctly add user and give token
+  if (bol === false){
+
   const hash = bcrypt.hashSync(creds.password, 10);
   creds.password = hash;
 
@@ -59,6 +81,8 @@ function register(req, res) {
       console.log(err);
       res.status(500).json({msg: "there was an error registering user"})
     })
+  }
+  
 }
 
 

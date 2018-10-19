@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Contain = styled.div`
 	max-width: 500px;
-	margin: 80px auto;
+	margin: 20px auto;
 	border: solid black 1px;
 	background-color: lightgreen;
 	margin-bottom: 20px;
@@ -33,3 +33,10 @@ export const BTNDiv = styled.div`
 	display: flex;
 	justify-content: center;
 `
+
+export const ErrorMsg = styled.div`
+	margin-top: 10px;
+	text-align: center;
+	color: red;
+`
+
