@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Joke from './Joke';
+import { Contain } from './css';
 
 class Jokes extends React.Component {
 	constructor(props){

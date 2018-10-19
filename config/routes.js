@@ -35,7 +35,7 @@ function generateToken(user){
 function register(req, res) {
   // implement user registration
   const creds = req.body
-  const hash = bcrypt.hashSync(creds.password, 14);
+  const hash = bcrypt.hashSync(creds.password, 10);
   creds.password = hash;
 
   db('users')
